@@ -16,6 +16,7 @@ namespace ConceptMatrix.ViewModel
             Swatches = new SwatchesProvider().Swatches;
         }
         public ICommand ToggleBackground { get; } = new AnotherCommandImplementation(o => ApplyBG((bool)o));
+        public ICommand ToggleResizable { get; } = new AnotherCommandImplementation(o => ApplyResizable((bool)o));
 
         public ICommand ToggleBaseCommand { get; } = new AnotherCommandImplementation(o => ApplyBase((bool)o));
 
@@ -47,7 +48,10 @@ namespace ConceptMatrix.ViewModel
             }
             SaveSettings.Default.HasBackground = isBG;
         }
-
+        private static void ApplyResizable(bool resizeable)
+        {
+            SaveSettings.Default.Resizable = resizeable;
+        }
         private static void ApplyBase(bool isDark)
         {
             new PaletteHelper().SetLightDark(isDark);

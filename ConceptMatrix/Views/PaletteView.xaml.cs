@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 namespace ConceptMatrix.Views
@@ -21,6 +22,7 @@ namespace ConceptMatrix.Views
             DataContext = new PaletteSelectorViewModel();
             if (SaveSettings.Default.Theme == "Dark") ThemeButton.IsChecked = true;
             if (SaveSettings.Default.HasBackground == true) BackgroundButton.IsChecked = true;
+            if (SaveSettings.Default.Resizable == true) ResizeButton.IsChecked = true;
             if (SaveSettings.Default.WindowsExplorer == true) Windowstoggled.IsChecked = true;
             if (SaveSettings.Default.UnfreezeOnGp == true) ActorDataGpose.IsChecked = true;
             if (SaveSettings.Default.DebugMode == true) DebugMode.IsChecked = true;
@@ -199,6 +201,30 @@ namespace ConceptMatrix.Views
                 System.Windows.Forms.Application.Restart();
                 System.Windows.Application.Current.Shutdown();
             }
+        }
+
+        private void ResizeButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Dispatcher.InvokeAsync(async () =>
+            {
+                var isChecked = ((ToggleButton) sender).IsChecked;
+                if (isChecked != null && (bool)isChecked)
+                {
+                    MainViewModel.MainTime.ResizeMode = ResizeMode.CanResize;
+                    MainViewModel.MainTime.ScrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
+                    MainViewModel.MainTime.ScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+                    MainViewModel.MainTime.Height += 18;
+                    MainViewModel.MainTime.Width += 18;
+                }
+                else
+                {
+                    MainViewModel.MainTime.ResizeMode = ResizeMode.CanMinimize;
+                    MainViewModel.MainTime.ScrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                    MainViewModel.MainTime.ScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                    MainViewModel.MainTime.Height -= 18;
+                    MainViewModel.MainTime.Width -= 18;
+                }
+            });
         }
     }
 }

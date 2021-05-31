@@ -297,4 +297,7 @@
   <data name="MinLengthValidationText" xml:space="preserve">
     <value>Must be greater than 0.</value>
   </data>
+  <data name="Resizable" xml:space="preserve">
+    <value>Resizable</value>
+  </data>
 </root>

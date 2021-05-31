@@ -146,5 +146,6 @@ namespace ConceptMatrix.Utility
 
         public CameraSettings LastCameraSave { get; set; }
         public double UITransparency { get; set; } = 1000;
+        public bool Resizable { get; set; } = false;
     }
 }

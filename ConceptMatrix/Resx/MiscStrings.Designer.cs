@@ -529,6 +529,15 @@ namespace ConceptMatrix.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resizable.
+        /// </summary>
+        public static string Resizable {
+            get {
+                return ResourceManager.GetString("Resizable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sepia 1.
         /// </summary>
         public static string Sepia1 {

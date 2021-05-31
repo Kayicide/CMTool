@@ -20,6 +20,7 @@ using System.Net;
 using ConceptMatrix.Views;
 using WepTuple = System.Tuple<int, int, int, int>;
 using System.Globalization;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace ConceptMatrix
@@ -85,8 +86,26 @@ namespace ConceptMatrix
                 return;
             }
 
+            SetupResizable();
+
             // needed to reference this as an object in PaletteView for transparency
             MainViewModel.MainTime = this;
+        }
+
+        public void SetupResizable()
+        {
+            if (SaveSettings.Default.Resizable)
+            {
+                ScrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
+                ScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+                this.Height += 18;
+                this.Width += 18;
+            }
+            else
+            {
+                ScrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                ScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            }
         }
 
         private void LanguageSelection()
